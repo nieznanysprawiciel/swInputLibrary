@@ -1,6 +1,6 @@
 #pragma once
 	
-#include "InputLibrary/IInput.h"
+#include "swInputLibrary/IInput.h"
 
 namespace InputFactory
 {

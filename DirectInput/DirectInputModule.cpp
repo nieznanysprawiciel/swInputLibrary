@@ -1,9 +1,9 @@
 #include "DirectInputModule.h"
-#include "Common/TypesDefinitions.h"
+#include "swCommonLib/Common/TypesDefinitions.h"
 
-#include "InputLibrary/Factory.h"
+#include "swInputLibrary/Factory.h"
 
-#include "Common/MemoryLeaks.h"
+#include "swCommonLib/Common/MemoryLeaks.h"
 
 #include <assert.h>
 

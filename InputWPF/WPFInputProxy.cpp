@@ -1,3 +1,9 @@
+/**
+@file WPFInputProxy.cpp
+@author nieznanysprawiciel
+@copyright File is part of graphic engine SWEngine.
+*/
+
 #include "WPFInputProxy.h"
 
 

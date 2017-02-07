@@ -6,7 +6,7 @@
 */
 
 
-#include "InputLibrary/IInput.h"
+#include "swInputLibrary/IInput.h"
 
 
 /**@brief Klasa do przekierowywania do silnika wejœcia pobranego z WPFa.*/

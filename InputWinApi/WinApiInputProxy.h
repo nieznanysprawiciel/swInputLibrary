@@ -6,7 +6,7 @@
 */
 
 
-#include "InputLibrary/IInput.h"
+#include "swInputLibrary/IInput.h"
 #include <Windows.h>
 
 
