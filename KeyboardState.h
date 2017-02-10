@@ -9,34 +9,18 @@
 #include "InputDeviceInfo.h"
 #include "KeyState.h"
 
+#include <vector>
+
 
 #define KEYBOARD_STATE_KEYS_NUMBER 256
 
 class KeyboardState
 {
-private:
-
-	InputDeviceInfo		m_info;
-	KeyState			m_keyboardState[ KEYBOARD_STATE_KEYS_NUMBER ];
-
 public:
-	explicit KeyboardState();
-	~KeyboardState();
+	typedef uint16 Timestamp;
 
-	const KeyState*				GetKeyboardState() const		{ return m_keyboardState; }
-	const InputDeviceInfo&		GetInfo			() const		{ return m_info; }
-
-	///@name Funkcje do ustawiania stanu (tylko dla dzieci IInput)
-	///@{
-	KeyState*					KeysState		()				{ return m_keyboardState; }
-	void						RemoveEvents	();
-	///@}
-
-public:
-	/**@brief Fizyczne numery przycisków na klawiaturze.
-	Nale¿y ich u¿ywaæ w strukturze InputMapping.
-
-	Numery pokrywaj¹ siê w ca³oœci z definicj¹ z DirectInputa.*/
+	/**@brief Physical keys numbers.
+	Numbers are the same as in DirectInput.*/
 	enum PHYSICAL_KEYS
 	{
 		  KEY_NONE			  = 0x00
@@ -208,6 +192,38 @@ public:
 		, KEY_PAGEDOWN		  = KEY_PGDN
 		, KEY_PRINTSCREEN	  = KEY_SYSRQ
 	};
+
+
+	/**@brief Key states changed events.*/
+	struct Event
+	{
+		KeyState		State;			///< Only up or down state.
+		PHYSICAL_KEYS	Key;	
+		Timestamp		LogicalTime;	///< You can compare this counter with counters in other devices, to compare events order.
+										///< This doesn't work between frames.
+	};
+
+private:
+
+	InputDeviceInfo			m_info;
+	KeyState				m_keyboardState[ KEYBOARD_STATE_KEYS_NUMBER ];
+
+	std::vector< Event >	m_inputEvents;
+
+public:
+	explicit KeyboardState();
+	~KeyboardState();
+
+	const KeyState*				GetKeyboardState() const		{ return m_keyboardState; }
+	const InputDeviceInfo&		GetInfo			() const		{ return m_info; }
+
+	///@name Funkcje do ustawiania stanu (tylko dla dzieci IInput)
+	///@{
+	KeyState*					KeysState		()				{ return m_keyboardState; }
+	void						RemoveEvents	();
+	///@}
+
+public:
 
 };
 

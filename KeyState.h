@@ -1,11 +1,14 @@
 #pragma once
 
+#include "swCommonLib/Common/TypesDefinitions.h"
 #include <assert.h>
+
+
 
 /**@brief Stan przycisku.*/
 class KeyState
 {
-	enum KeyStateFlag
+	enum KeyStateFlag : int8
 	{
 		Pressed = 0x1,
 		DownEvent = 0x2,
