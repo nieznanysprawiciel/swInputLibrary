@@ -21,7 +21,7 @@ typedef uint16 Timestamp;
 
 /**@brief Physical keys numbers.
 Numbers are the same as in DirectInput.*/
-enum PHYSICAL_KEYS
+enum PHYSICAL_KEYS : uint8
 {
 	KEY_NONE			  = 0x00
 	, KEY_ESCAPE          = 0x01
@@ -227,17 +227,31 @@ enum PHYSICAL_AXES : int8
 };
 
 
+/**@brief Input device event types.*/
+enum class DeviceEventType : uint8
+{
+	KeyboardEvent,
+	ButtonEvent,
+	AxisEvent,
+	CursorEvent
+};
+
+
 /**@brief Keyboard key change event.*/
 struct KeyEvent
 {
 	KeyState		State;			///< Only up or down state.
 	PHYSICAL_KEYS	Key;
+	Timestamp		LogicalTime;	///< You can compare this counter with counters in other devices, to compare events order.
+									///< This doesn't work between frames.
 };
 
 /**@brief Mouse button Change event.*/
 struct ButtonEvent
 {
 	KeyState			State;			///< Only up or down state.
+	Timestamp			LogicalTime;	///< You can compare this counter with counters in other devices, to compare events order.
+										///< This doesn't work between frames.
 	PHYSICAL_BUTTONS	Button;
 };
 
@@ -245,6 +259,8 @@ struct ButtonEvent
 struct AxisEvent
 {
 	float				Delta;			///< Axis delta.
+	Timestamp			LogicalTime;	///< You can compare this counter with counters in other devices, to compare events order.
+										///< This doesn't work between frames.
 	PHYSICAL_AXES		Axis;
 };
 
@@ -253,6 +269,8 @@ struct CursorEvent
 {
 	short				OffsetX;
 	short				OffsetY;
+	Timestamp			LogicalTime;	///< You can compare this counter with counters in other devices, to compare events order.
+										///< This doesn't work between frames.
 };
 
 /**@brief KeyStates changed events.*/
@@ -264,10 +282,34 @@ struct DeviceEvent
 		ButtonEvent		Button;
 		AxisEvent		Axis;
 		CursorEvent		Cursor;
-	}				InputData;
-	Timestamp		LogicalTime;	///< You can compare this counter with counters in other devices, to compare events order.
-									///< This doesn't work between frames.
+	};
+	DeviceEventType		Type;
 
+// ================================ //
+//
+	DeviceEvent( KeyEvent evt )
+	{
+		Type = DeviceEventType::KeyboardEvent;
+		Key = evt;
+	}
+
+	DeviceEvent( ButtonEvent evt )
+	{
+		Type = DeviceEventType::KeyboardEvent;
+		Button = evt;
+	}
+
+	DeviceEvent( AxisEvent evt )
+	{
+		Type = DeviceEventType::KeyboardEvent;
+		Axis = evt;
+	}
+
+	DeviceEvent( CursorEvent evt )
+	{
+		Type = DeviceEventType::KeyboardEvent;
+		Cursor = evt;
+	}
 };
 
 

@@ -25,7 +25,7 @@ private:
 	InputDeviceInfo		m_info;
 	KeyboardState		m_state;
 
-	std::vector< DeviceEvent >		m_events;
+	std::vector< KeyEvent >		m_events;
 
 protected:
 public:
