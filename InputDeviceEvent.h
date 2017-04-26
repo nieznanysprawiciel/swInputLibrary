@@ -10,8 +10,11 @@
 
 
 
-namespace sw
+
+namespace sw {
+namespace input
 {
+
 
 typedef uint16 Timestamp;
 
@@ -20,7 +23,7 @@ typedef uint16 Timestamp;
 Numbers are the same as in DirectInput.*/
 enum PHYSICAL_KEYS
 {
-		KEY_NONE			  = 0x00
+	KEY_NONE			  = 0x00
 	, KEY_ESCAPE          = 0x01
 	, KEY_1               = 0x02
 	, KEY_2               = 0x03
@@ -191,7 +194,7 @@ enum PHYSICAL_KEYS
 };
 
 /**@brief Physical buttons.
-	
+
 Enums form BUTTON0 to BUTTON2 are buttons right, left and modle.
 There'ra aliases for them: LEFT_BUTTON, RIGHT_BUTTON, MIDDLE_BUTTON.
 
@@ -224,51 +227,56 @@ enum PHYSICAL_AXES : int8
 };
 
 
+/**@brief Keyboard key change event.*/
 struct KeyEvent
+{
+	KeyState		State;			///< Only up or down state.
+	PHYSICAL_KEYS	Key;
+};
+
+/**@brief Mouse button Change event.*/
+struct ButtonEvent
 {
 	KeyState			State;			///< Only up or down state.
 	PHYSICAL_BUTTONS	Button;
 };
 
+/**@brief Mouse or joystick axis value changed event.*/
 struct AxisEvent
 {
 	float				Delta;			///< Axis delta.
 	PHYSICAL_AXES		Axis;
 };
 
-
+/**@brief Cursor position changed event.*/
 struct CursorEvent
 {
 	short				OffsetX;
 	short				OffsetY;
 };
 
-/**@brief Key states changed events.*/
-struct Event
+/**@brief KeyStates changed events.*/
+struct DeviceEvent
 {
 	union
 	{
 		KeyEvent		Key;
+		ButtonEvent		Button;
 		AxisEvent		Axis;
 		CursorEvent		Cursor;
 	}				InputData;
 	Timestamp		LogicalTime;	///< You can compare this counter with counters in other devices, to compare events order.
 									///< This doesn't work between frames.
-		
-};
 
-
-/**@brief Key states changed events.*/
-struct Event
-{
-	KeyState		State;			///< Only up or down state.
-	PHYSICAL_KEYS	Key;	
-	Timestamp		LogicalTime;	///< You can compare this counter with counters in other devices, to compare events order.
-									///< This doesn't work between frames.
 };
 
 
 
+
+
+
+
+}	// input
 }	// sw
 
 

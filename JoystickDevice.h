@@ -1,11 +1,11 @@
 #pragma once
 /**
-@file KeyboardDevice.h
+@file JoystickDevice.h
 @author nieznanysprawiciel
 @copyright File is part of Sleeping Wombat Libraries.
 */
 
-#include "KeyboardState.h"
+#include "JoystickState.h"
 #include "InputDeviceInfo.h"
 #include "InputDeviceEvent.h"
 
@@ -17,20 +17,20 @@ namespace input
 {
 
 
-/**@brief Keyboard state and events.*/
-class KeyboardDevice
+/**@brief Joystick or other controller state and events.*/
+class JoystickDevice
 {
 private:
 
 	InputDeviceInfo		m_info;
-	KeyboardState		m_state;
+	JoystickState		m_state;
 
 	std::vector< DeviceEvent >		m_events;
 
 protected:
 public:
-	explicit		KeyboardDevice		() = default;
-					~KeyboardDevice		() = default;
+	explicit		JoystickDevice		() = default;
+					~JoystickDevice		() = default;
 
 
 	const InputDeviceInfo&		GetInfo			() const { return m_info; }
@@ -39,4 +39,5 @@ public:
 
 }	// input
 }	// sw
+
 
