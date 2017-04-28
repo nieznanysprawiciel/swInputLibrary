@@ -35,6 +35,11 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\InputWinApi\WinApiInputProxy.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\InputCore\InputCore.vcxproj">
+      <Project>{ebc3abf4-e788-4242-a949-d366fc128b0e}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{9351732D-B6EC-4DB2-BD75-F18E880B3815}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>

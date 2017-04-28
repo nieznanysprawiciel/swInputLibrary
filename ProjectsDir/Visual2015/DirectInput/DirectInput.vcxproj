@@ -37,6 +37,11 @@
     <ClInclude Include="..\..\..\MouseDevice.h" />
     <ClInclude Include="..\..\..\MouseState.h" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\InputCore\InputCore.vcxproj">
+      <Project>{ebc3abf4-e788-4242-a949-d366fc128b0e}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{D1075B79-925A-436F-8C53-09BD4D5787E4}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
