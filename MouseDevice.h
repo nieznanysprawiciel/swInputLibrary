@@ -58,6 +58,38 @@ public:
 
 DEFINE_OPTR_TYPE( MouseDevice );
 
+//====================================================================================//
+//			Inline implementation	
+//====================================================================================//
+
+// ================================ //
+//
+inline void			MouseDevice::AddEvent		( const DeviceEvent& event )
+{
+	m_events.push_back( event );
+}
+
+// ================================ //
+//
+inline void			MouseDevice::AddEvent		( const ButtonEvent& event )
+{
+	AddEvent( DeviceEvent( event ) );
+}
+
+// ================================ //
+//
+inline void			MouseDevice::AddEvent		( const AxisEvent& event )
+{
+	AddEvent( DeviceEvent( event ) );
+}
+
+// ================================ //
+//
+inline void			MouseDevice::AddEvent		( const CursorEvent& event )
+{
+	AddEvent( DeviceEvent( event ) );
+}
+
 }	// input
 }	// sw
 

@@ -56,11 +56,5 @@
     <ClCompile Include="..\..\..\DirectInput\DirectInputModule.cpp">
       <Filter>DirectInput</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\KeyboardDevice.cpp">
-      <Filter>InputLibrary</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\MouseDevice.cpp">
-      <Filter>InputLibrary</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>

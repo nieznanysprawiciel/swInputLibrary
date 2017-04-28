@@ -70,6 +70,26 @@ public:
 
 DEFINE_OPTR_TYPE( KeyboardDevice );
 
+//====================================================================================//
+//			Inline implementation	
+//====================================================================================//
+
+
+
+// ================================ //
+//
+inline void			KeyboardDevice::AddEvent		( const KeyEvent& event )
+{
+	m_events.push_back( event );
+}
+
+// ================================ //
+//
+inline void			KeyboardDevice::AddEvent		( const CharacterEvent& event )
+{
+	m_characters.push_back( event );
+}
+
 
 }	// input
 }	// sw

@@ -20,8 +20,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\DirectInput\DirectInputModule.cpp" />
-    <ClCompile Include="..\..\..\KeyboardDevice.cpp" />
-    <ClCompile Include="..\..\..\MouseDevice.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Device.h" />

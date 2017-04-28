@@ -384,14 +384,14 @@ void			WPFInputProxy::MousePositionChange		( double X, double Y )
 	auto& mouse = m_mousesStates[ 0 ];
 	
 	CursorEvent cursorEvent;
-	cursorEvent.OffsetX = X - m_lastX;
-	cursorEvent.OffsetY = Y - m_lastY;
+	cursorEvent.OffsetX = (uint16)X - m_lastX;
+	cursorEvent.OffsetY = (uint16)Y - m_lastY;
 	cursorEvent.LogicalTime = m_eventNum++;
 
 	m_mouses[ 0 ]->AddEvent( cursorEvent );
 
-	m_lastX = X;
-	m_lastY = Y;
+	m_lastX = (uint16)X;
+	m_lastY = (uint16)Y;
 
 	// Change in mouse position is translated into axis change.
 	// Theoretically it's the same event but better give it a new number.
