@@ -1,6 +1,6 @@
 #pragma once
 
-#include "swInputLibrary/IInput.h"
+#include "swInputLibrary/InputCore/IInput.h"
 #include "IncludeDirectInput.h"
 
 #include <vector>

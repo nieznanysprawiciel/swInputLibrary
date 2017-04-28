@@ -6,11 +6,11 @@
 */
 
 
-#include "swInputLibrary/IInput.h"
+#include "swInputLibrary/InputCore/IInput.h"
 
-#include "swInputLibrary/MouseDevice.h"
-#include "swInputLibrary/KeyboardDevice.h"
-#include "swInputLibrary/JoystickDevice.h"
+#include "swInputLibrary/InputCore/MouseDevice.h"
+#include "swInputLibrary/InputCore/KeyboardDevice.h"
+#include "swInputLibrary/InputCore/JoystickDevice.h"
 
 
 namespace sw {

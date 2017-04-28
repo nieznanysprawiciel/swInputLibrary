@@ -1,7 +1,7 @@
 #include "DirectInputModule.h"
 #include "swCommonLib/Common/TypesDefinitions.h"
 
-#include "swInputLibrary/Factory.h"
+#include "swInputLibrary/InputCore/Factory.h"
 
 #include "swCommonLib/Common/MemoryLeaks.h"
 

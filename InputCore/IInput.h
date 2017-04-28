@@ -10,9 +10,9 @@
 #include "MouseState.h"
 #include "JoystickState.h"
 
-#include "swInputLibrary/MouseDevice.h"
-#include "swInputLibrary/KeyboardDevice.h"
-#include "swInputLibrary/JoystickDevice.h"
+#include "swInputLibrary/InputCore/MouseDevice.h"
+#include "swInputLibrary/InputCore/KeyboardDevice.h"
+#include "swInputLibrary/InputCore/JoystickDevice.h"
 
 #include "InputDeviceInfo.h"
 
