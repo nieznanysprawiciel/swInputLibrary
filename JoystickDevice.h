@@ -5,6 +5,8 @@
 @copyright File is part of Sleeping Wombat Libraries.
 */
 
+#include "Device.h"
+
 #include "JoystickState.h"
 #include "InputDeviceInfo.h"
 #include "InputDeviceEvent.h"
@@ -17,8 +19,10 @@ namespace input
 {
 
 
-/**@brief Joystick or other controller state and events.*/
-class JoystickDevice
+/**@brief Joystick or other controller state and events.
+
+@ingroup Input*/
+class JoystickDevice : public Device
 {
 private:
 
@@ -34,7 +38,10 @@ public:
 
 
 	const InputDeviceInfo&		GetInfo			() const { return m_info; }
+	const JoystickState&		GetState		() const { return m_state; }
 };
+
+DEFINE_OPTR_TYPE( JoystickDevice );
 
 
 }	// input

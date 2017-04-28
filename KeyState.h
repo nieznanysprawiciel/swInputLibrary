@@ -1,11 +1,21 @@
 #pragma once
+/**
+@file KeyState.h
+@author nieznanysprawiciel
+@copyright File is part of Sleeping Wombat Libraries.
+*/
+
+
 
 #include "swCommonLib/Common/TypesDefinitions.h"
+
 #include <assert.h>
 
 
 
-/**@brief Stan przycisku.*/
+/**@brief Stan przycisku.
+
+@ingroup Input*/
 class KeyState
 {
 	enum KeyStateFlag : int8
@@ -17,9 +27,13 @@ class KeyState
 
 private:
 
-	char	m_state;
+	int8			m_state;
 
 public:
+
+	explicit		KeyState()
+		: m_state( 0 )
+	{}
 
 	inline bool		IsPressed		() const	{ return ( m_state & Pressed ) != 0; }
 	inline bool		IsUp			() const	{ return !IsPressed(); }

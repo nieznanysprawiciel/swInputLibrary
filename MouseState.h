@@ -1,113 +1,66 @@
 #pragma once
+/**
+@file MouseState.h
+@author nieznanysprawiciel
+@copyright File is part of Sleeping Wombat Libraries.
+*/
 
-#include "InputDeviceInfo.h"
+
 #include "KeyState.h"
+#include "InputDeviceEvent.h"
 
 
-#define MOUSE_STATE_BUTTONS_NUMBER 8
+namespace sw {
+namespace input
+{
 
+/**@brief Max number of mouse buttons.*/
+const int8	MOUSE_STATE_MAX_NUM_BUTTONS = 8;
+/**@brief Max number of mouse axes.*/
+const int8	MOUSE_STATE_MAX_NUM_AXES = 4;
+
+
+
+/**@brief State of mouse.
+
+@ingroup Input*/
 class MouseState
 {
-public:
-	typedef uint16 Timestamp;
-
-	/**@brief Physical buttons.
-	
-	Enums form BUTTON0 to BUTTON2 are buttons right, left and modle.
-	There'ra aliases for them: LEFT_BUTTON, RIGHT_BUTTON, MIDDLE_BUTTON.
-
-	Next numbers means rest of buttons which can exist on mouse device.*/
-	enum PHYSICAL_BUTTONS : int8
-	{
-		BUTTON0 = 0,
-		BUTTON1 = 1,
-		BUTTON2 = 2,
-		BUTTON3 = 3,
-		BUTTON4 = 4,
-		BUTTON5 = 5,
-		BUTTON6 = 6,
-		BUTTON7 = 7,
-		LEFT_BUTTON = BUTTON0,
-		RIGHT_BUTTON = BUTTON1,
-		MIDDLE_BUTTON = BUTTON2,
-
-		NONE = 8,
-	};
-
-	/**@brief Physical axes of mouse.*/
-	enum PHYSICAL_AXES : int8
-	{
-		X_AXIS = 0,
-		Y_AXIS = 1,
-		Z_AXIS = 2,
-		W_AXIS = 3,
-		WHEEL = Z_AXIS
-	};
-
-
-	struct KeyEvent
-	{
-		KeyState			State;			///< Only up or down state.
-		PHYSICAL_BUTTONS	Button;
-	};
-
-	struct AxisEvent
-	{
-		float				Delta;			///< Axis delta.
-		PHYSICAL_AXES		Axis;
-	};
-
-
-	struct CursorEvent
-	{
-		short				OffsetX;
-		short				OffsetY;
-	};
-
-	/**@brief Key states changed events.*/
-	struct Event
-	{
-		union
-		{
-			KeyEvent		Key;
-			AxisEvent		Axis;
-			CursorEvent		Cursor;
-		}				InputData;
-		Timestamp		LogicalTime;	///< You can compare this counter with counters in other devices, to compare events order.
-										///< This doesn't work between frames.
-		
-	};
-
-
 private:
 
-	InputDeviceInfo		m_info;
-
 	float				m_axes[ 4 ];
-	short				m_position[ 2 ];	///< Wspó³rzêdne X i Y.
-	KeyState			m_buttons[ MOUSE_STATE_BUTTONS_NUMBER ];
+	uint16				m_position[ 2 ];	///< Wspó³rzêdne X i Y.
+	KeyState			m_buttons[ MOUSE_STATE_MAX_NUM_BUTTONS ];
 
 public:
 	MouseState();
 	~MouseState();
 
-	float*						GetAxesState()		{ return m_axes; }
-	KeyState*					GetButtonsState()	{ return m_buttons; }
+	const float*				GetAxesState	() const { return m_axes; }
+	const KeyState*				GetButtonsState	() const { return m_buttons; }
 
-	short						GetPositionX()		{ return m_position[ 0 ]; }
-	short						GetPositionY()		{ return m_position[ 1 ]; }
+	uint16						GetPositionX	() const { return m_position[ 0 ]; }
+	uint16						GetPositionY	() const { return m_position[ 1 ]; }
 
 	void						SetPosition			( short X, short Y );
 
-	const InputDeviceInfo&		GetInfo()			{ return m_info; }
-
-	///@name Funkcje do ustawiania stanu (tylko dla dzieci IInput)
+	///@name Functions for setting state (only for IInput)
 	///@{
 	void						RemoveEvents	();
 	///@}
 
 
+	/**@brief Updates state depending on event.*/
+	void						ApplyEvent		( const ButtonEvent& event );
 
+	/**@brief Updates state depending on event.*/
+	void						ApplyEvent		( const AxisEvent& event );
+
+	/**@brief Updates state depending on event.*/
+	void						ApplyEvent		( const CursorEvent& event );
+
+	/**@brief Updates state depending on event.*/
+	void						ApplyEvent		( const DeviceEvent& event );
 };
 
 /**@brief */
@@ -121,7 +74,7 @@ inline MouseState::MouseState()
 
 /**@brief */
 inline MouseState::~MouseState()
-{ }
+{}
 
 /**@brief Ustawia pozycjê myszy.
 
@@ -135,7 +88,55 @@ inline void			MouseState::SetPosition			( short X, short Y )
 /**@brief Czyœci tablicê z eventów o wciœniêciu klawiszy, ale podtrzymuje stan przycisków.*/
 inline void			MouseState::RemoveEvents	()
 {
-	for( int i = 0; i < MOUSE_STATE_BUTTONS_NUMBER; ++i )
+	for( int i = 0; i < MOUSE_STATE_MAX_NUM_BUTTONS; ++i )
 		m_buttons[ i ].HoldState();
 }
 
+// ================================ //
+//
+inline void			MouseState::ApplyEvent		( const ButtonEvent& event )
+{
+	KeyState& state = m_buttons[ event.Button ];
+	state = event.State.IsPressed();
+}
+
+// ================================ //
+//
+inline void			MouseState::ApplyEvent		( const AxisEvent& event )
+{
+	float& axis = m_axes[ event.Axis ];
+	axis += event.Delta;
+}
+
+// ================================ //
+//
+inline void			MouseState::ApplyEvent		( const CursorEvent& event )
+{
+	m_position[ 0 ] += event.OffsetX;
+	m_position[ 1 ] += event.OffsetY;
+}
+
+// ================================ //
+//
+inline void			MouseState::ApplyEvent		( const DeviceEvent& event )
+{
+	switch( event.Type )
+	{
+		case DeviceEventType::ButtonEvent:
+			ApplyEvent( event.Button );
+			break;
+		case DeviceEventType::AxisEvent:
+			ApplyEvent( event.Axis );
+			break;
+		case DeviceEventType::CursorEvent:
+			ApplyEvent( event.Cursor );
+			break;
+		default:
+			break;
+	}
+}
+
+
+
+}	// input
+}	// sw

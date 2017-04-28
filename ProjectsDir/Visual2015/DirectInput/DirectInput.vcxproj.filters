@@ -48,10 +48,19 @@
     <ClInclude Include="..\..\..\JoystickDevice.h">
       <Filter>InputLibrary</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Device.h">
+      <Filter>InputLibrary</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\DirectInput\DirectInputModule.cpp">
       <Filter>DirectInput</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\KeyboardDevice.cpp">
+      <Filter>InputLibrary</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\MouseDevice.cpp">
+      <Filter>InputLibrary</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

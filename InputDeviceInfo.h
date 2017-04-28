@@ -2,12 +2,15 @@
 /**
 @file InputDeviceInfo.h
 @author nieznanysprawiciel
-@copyright Plik jest czêœci¹ silnika graficznego SWEngine.
+@copyright File is part of Sleeping Wombat Libraries.
 */
 
 
-/**@brief Dane urz¹dzenia.
-Do przysz³ego u¿ytku.*/
+
+/**@brief Information about device.
+For future use.
+
+@ingroup Input*/
 struct InputDeviceInfo
 {};
 

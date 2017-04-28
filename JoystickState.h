@@ -2,34 +2,41 @@
 /**
 @file JoystickState.h
 @author nieznanysprawiciel
-@copyright Plik jest czêœci¹ silnika graficznego SWEngine.
+@copyright File is part of Sleeping Wombat Libraries.
 */
 
 
-#include "InputDeviceInfo.h"
 
 
-/**@brief Stan joysticka lub innego urz¹dzenia wejœcia, które nie jest
-klawiatur¹ lub mysz¹.*/
+namespace sw {
+namespace input
+{
+
+
+/**@brief State of joystick device or other controllers which aren't mouse and keyboard.
+
+@ingroup Input*/
 class JoystickState
 {
 private:
-
-	InputDeviceInfo		m_info;
-
 
 public:
 	JoystickState();
 	~JoystickState();
 
-	const InputDeviceInfo&		GetInfo()	{ return m_info; }
 };
 
+// ================================ //
+//
 inline JoystickState::JoystickState()
-{ }
+{}
 
-
+// ================================ //
+//
 inline JoystickState::~JoystickState()
-{ }
+{}
 
+
+}	// input
+}	// sw
 

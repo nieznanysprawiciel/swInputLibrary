@@ -2,9 +2,26 @@
 	
 #include "swInputLibrary/IInput.h"
 
+
+
+
+namespace sw {
+namespace input
+{
+
+
+
+
 namespace InputFactory
 {
-	
-	IInput*			CreateDirectInput		();
+
+IInput*			CreateDirectInput		();
 
 }	//	InputLibrary
+
+
+
+
+}	// input
+}	// sw
+
