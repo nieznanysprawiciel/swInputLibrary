@@ -28,7 +28,7 @@ WPFInputProxy::~WPFInputProxy()
 {}
 
 /**@brief */
-bool WPFInputProxy::Init( const InputInitInfo & initInfo )
+bool			WPFInputProxy::Init( const InputInitInfo & initInfo )
 {
 	m_keyboards.push_back( KeyboardDeviceOPtr( new KeyboardDevice() ) );
 	m_mouses.push_back( MouseDeviceOPtr( new MouseDevice() ) );

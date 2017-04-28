@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\InputCore\Debugging\DebugInput.h" />
+    <ClInclude Include="..\..\..\InputCore\Debugging\EventCapture.h" />
     <ClInclude Include="..\..\..\InputCore\Device.h" />
     <ClInclude Include="..\..\..\InputCore\Factory.h" />
     <ClInclude Include="..\..\..\InputCore\IInput.h" />
@@ -31,6 +33,10 @@
     <ClInclude Include="..\..\..\InputCore\KeyState.h" />
     <ClInclude Include="..\..\..\InputCore\MouseDevice.h" />
     <ClInclude Include="..\..\..\InputCore\MouseState.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\InputCore\Debugging\DebugInput.cpp" />
+    <ClCompile Include="..\..\..\InputCore\Debugging\EventCapture.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{EBC3ABF4-E788-4242-A949-D366FC128B0E}</ProjectGuid>

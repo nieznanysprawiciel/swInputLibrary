@@ -4,6 +4,9 @@
     <Filter Include="InputCore">
       <UniqueIdentifier>{5ee55bfe-c5ba-46a5-8b1c-962631df3f02}</UniqueIdentifier>
     </Filter>
+    <Filter Include="InputCore\Debugging">
+      <UniqueIdentifier>{06286a69-d980-4588-97f0-fa1f7281dc0b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\InputCore\Device.h">
@@ -42,5 +45,19 @@
     <ClInclude Include="..\..\..\InputCore\MouseState.h">
       <Filter>InputCore</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\InputCore\Debugging\DebugInput.h">
+      <Filter>InputCore\Debugging</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\InputCore\Debugging\EventCapture.h">
+      <Filter>InputCore\Debugging</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\InputCore\Debugging\DebugInput.cpp">
+      <Filter>InputCore\Debugging</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\InputCore\Debugging\EventCapture.cpp">
+      <Filter>InputCore\Debugging</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
