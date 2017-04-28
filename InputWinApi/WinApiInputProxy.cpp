@@ -264,6 +264,17 @@ void			WinApiInputProxy::KeyboardChange		( int keyId, bool pressed )
 	m_keyboards[ 0 ]->AddEvent( keyEvent );
 }
 
+// ================================ //
+//
+void			WinApiInputProxy::KeyboardCharacter		( wchar_t character )
+{
+	CharacterEvent charEvent;
+	charEvent.Character = character;
+	charEvent.LogicalTime = m_eventNum++;
+
+	m_keyboards[ 0 ]->AddEvent( charEvent );
+}
+
 
 /**@brief Ustawia nowy stan przycisku myszy.
 
@@ -335,28 +346,44 @@ void			WinApiInputProxy::LostFocus()
 Je¿eli siê u¿ywa tej funkcji nie nale¿y ju¿ wywo³ywaæ pozosta³ych funkcji.*/
 void			WinApiInputProxy::HandleEvent			( HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam )
 {
-	if( message == WM_MOUSEMOVE )
+	switch( message )
 	{
-		int xPos = GET_X_LPARAM( lParam );
-		int yPos = GET_Y_LPARAM( lParam );
-		MousePositionChange( xPos, yPos );
+		case WM_MOUSEMOVE:
+		{
+			int xPos = GET_X_LPARAM( lParam );
+			int yPos = GET_Y_LPARAM( lParam );
+			MousePositionChange( xPos, yPos );
+
+			break;
+		}
+		case WM_KEYDOWN:
+		{
+			if( wParam <= VK_XBUTTON2 )
+				MouseButtonChange( (int)wParam, true );
+			KeyboardChange( (int)wParam, true );
+
+			break;
+		}
+		case WM_KEYUP:
+		{
+			if( wParam <= VK_XBUTTON2 )
+				MouseButtonChange( (int)wParam, false );
+			KeyboardChange( (int)wParam, false );
+
+			break;
+		}
+		case WM_MOUSEWHEEL:
+		{
+			MouseWheelChange( GET_WHEEL_DELTA_WPARAM( wParam ) );
+			break;
+		}
+		case WM_CHAR:
+			KeyboardCharacter( (wchar_t)wParam );
+			break;
+		default:
+			break;
 	}
-	else if( message == WM_KEYDOWN )
-	{
-		if( wParam <= VK_XBUTTON2 )
-			MouseButtonChange( (int)wParam, true );
-		KeyboardChange( (int)wParam, true );
-	}
-	else if( message == WM_KEYUP )
-	{
-		if( wParam <= VK_XBUTTON2 )
-			MouseButtonChange( (int)wParam, false );
-		KeyboardChange( (int)wParam, false );
-	}
-	else if( message == WM_MOUSEWHEEL )
-	{
-		MouseWheelChange( GET_WHEEL_DELTA_WPARAM( wParam ) );
-	}
+
 }
 
 

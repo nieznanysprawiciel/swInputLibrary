@@ -63,6 +63,7 @@ public:
 	///@name WinaAPI API
 	///@{
 	void				KeyboardChange				( int keyId, bool pressed );
+	void				KeyboardCharacter			( wchar_t character );
 	void				MouseButtonChange			( int button, bool pressed );
 	void				MousePositionChange			( short X, short Y );
 	void				MouseWheelChange			( double delta );
