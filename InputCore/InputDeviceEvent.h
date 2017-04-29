@@ -310,6 +310,7 @@ struct DeviceEvent
 	union
 	{
 		KeyEvent		Key;
+		CharacterEvent	Character;
 		ButtonEvent		Button;
 		AxisEvent		Axis;
 		CursorEvent		Cursor;

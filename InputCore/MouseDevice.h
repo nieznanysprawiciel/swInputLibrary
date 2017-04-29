@@ -42,6 +42,9 @@ public:
 	const InputDeviceInfo&		GetInfo			() const	{ return m_info; }
 	const MouseState&			GetState		() const	{ return m_state;  }
 
+	EventQueue< DeviceEvent >&	GetEventsQueue	()			{ return m_events; }
+
+	void						ApplyAllEvents	();
 
 public:
 	///@name Functions for setting state (only for IInput)
@@ -63,6 +66,17 @@ DEFINE_OPTR_TYPE( MouseDevice );
 //====================================================================================//
 //			Inline implementation	
 //====================================================================================//
+
+// ================================ //
+//
+inline void			MouseDevice::ApplyAllEvents	()
+{
+	while( !m_events.NoMoreEvents() )
+	{
+		auto& event = m_events.PopEvent();
+		m_state.ApplyEvent( event );
+	}
+}
 
 // ================================ //
 //

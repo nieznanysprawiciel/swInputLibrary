@@ -56,6 +56,10 @@ public:
 	const InputDeviceInfo&		GetInfo			() const	{ return m_info; }
 	const KeyboardState&		GetState		() const	{ return m_state; }
 
+	EventQueue< KeyEvent >&				GetEventsQueue		()			{ return m_events; }
+	EventQueue< CharacterEvent >&		GetCharactersQueue	()			{ return m_characters; }
+
+	void						ApplyAllEvents	();
 
 public:
 
@@ -68,6 +72,7 @@ public:
 	void			AddEvent		( const CharacterEvent& event );
 
 	///@}
+
 };
 
 DEFINE_OPTR_TYPE( KeyboardDevice );
@@ -77,6 +82,20 @@ DEFINE_OPTR_TYPE( KeyboardDevice );
 //====================================================================================//
 
 
+// ================================ //
+//
+inline void			KeyboardDevice::ApplyAllEvents	()
+{
+	while( !m_events.NoMoreEvents() )
+	{
+		auto& event = m_events.PopEvent();
+		m_state.ApplyEvent( event );
+	}
+
+	// Characters don't influence KeyboardState.
+	while( !m_characters.NoMoreEvents() )
+		m_characters.PopEvent();
+}
 
 // ================================ //
 //

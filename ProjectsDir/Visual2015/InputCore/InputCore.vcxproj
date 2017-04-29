@@ -24,6 +24,7 @@
     <ClInclude Include="..\..\..\InputCore\Device.h" />
     <ClInclude Include="..\..\..\InputCore\EventQueue.h" />
     <ClInclude Include="..\..\..\InputCore\Factory.h" />
+    <ClInclude Include="..\..\..\InputCore\Helpers\InputDispatcher.h" />
     <ClInclude Include="..\..\..\InputCore\IInput.h" />
     <ClInclude Include="..\..\..\InputCore\InputDeviceEvent.h" />
     <ClInclude Include="..\..\..\InputCore\InputDeviceInfo.h" />

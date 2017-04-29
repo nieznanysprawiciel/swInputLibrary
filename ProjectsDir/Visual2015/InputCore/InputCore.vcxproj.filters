@@ -7,6 +7,9 @@
     <Filter Include="InputCore\Debugging">
       <UniqueIdentifier>{06286a69-d980-4588-97f0-fa1f7281dc0b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="InputCore\Helpers">
+      <UniqueIdentifier>{9cf28505-57ac-4933-85d3-ea9c7416cf4b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\InputCore\Device.h">
@@ -53,6 +56,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\InputCore\EventQueue.h">
       <Filter>InputCore</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\InputCore\Helpers\InputDispatcher.h">
+      <Filter>InputCore\Helpers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

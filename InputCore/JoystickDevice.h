@@ -11,6 +11,8 @@
 #include "InputDeviceInfo.h"
 #include "InputDeviceEvent.h"
 
+#include "EventQueue.h"
+
 #include <vector>
 
 
@@ -29,7 +31,7 @@ private:
 	InputDeviceInfo		m_info;
 	JoystickState		m_state;
 
-	std::vector< DeviceEvent >		m_events;
+	EventQueue< DeviceEvent >		m_events;
 
 protected:
 public:
@@ -39,9 +41,31 @@ public:
 
 	const InputDeviceInfo&		GetInfo			() const { return m_info; }
 	const JoystickState&		GetState		() const { return m_state; }
+
+	void						ApplyAllEvents	();
+
+	EventQueue< DeviceEvent >&		GetEventsQueue		()			{ return m_events; }
 };
 
 DEFINE_OPTR_TYPE( JoystickDevice );
+
+
+//====================================================================================//
+//			Inline implementation	
+//====================================================================================//
+
+
+// ================================ //
+//
+inline void			JoystickDevice::ApplyAllEvents	()
+{
+	while( !m_events.NoMoreEvents() )
+	{
+		auto& event = m_events.PopEvent();
+		//m_state.ApplyEvent( event );
+	}
+}
+
 
 
 }	// input
