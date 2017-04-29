@@ -47,7 +47,7 @@ public:
 	Always check if there're any events in queue left.*/
 	inline const EventType&				FrontEvent		() const	{ assert( !NoMoreEvents() ); return m_events[ m_readPointer ]; }
 
-	/**@brief */
+	/**@brief Gets next event and moves m_readPointer.*/
 	inline const EventType&				PopEvent		();
 
 	/**@brief Gets whole array of events.
