@@ -51,6 +51,9 @@
     <ClInclude Include="..\..\..\InputCore\Debugging\EventCapture.h">
       <Filter>InputCore\Debugging</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\InputCore\EventQueue.h">
+      <Filter>InputCore</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\InputCore\Debugging\DebugInput.cpp">

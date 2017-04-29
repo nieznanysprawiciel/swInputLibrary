@@ -11,6 +11,8 @@
 #include "InputDeviceInfo.h"
 #include "InputDeviceEvent.h"
 
+#include "EventQueue.h"
+
 #include <vector>
 
 
@@ -29,7 +31,7 @@ private:
 	InputDeviceInfo		m_info;
 	MouseState			m_state;
 
-	std::vector< DeviceEvent >		m_events;
+	EventQueue< DeviceEvent >		m_events;
 
 protected:
 public:
@@ -66,7 +68,7 @@ DEFINE_OPTR_TYPE( MouseDevice );
 //
 inline void			MouseDevice::AddEvent		( const DeviceEvent& event )
 {
-	m_events.push_back( event );
+	m_events.AddEvent( event );
 }
 
 // ================================ //

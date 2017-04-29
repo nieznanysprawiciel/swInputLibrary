@@ -11,6 +11,8 @@
 #include "InputDeviceInfo.h"
 #include "InputDeviceEvent.h"
 
+#include "EventQueue.h"
+
 #include <queue>
 
 
@@ -42,8 +44,8 @@ private:
 	InputDeviceInfo		m_info;
 	KeyboardState		m_state;
 
-	std::vector< KeyEvent >			m_events;
-	std::vector< CharacterEvent >	m_characters;
+	EventQueue< KeyEvent >			m_events;
+	EventQueue< CharacterEvent >	m_characters;
 
 protected:
 public:
@@ -80,14 +82,14 @@ DEFINE_OPTR_TYPE( KeyboardDevice );
 //
 inline void			KeyboardDevice::AddEvent		( const KeyEvent& event )
 {
-	m_events.push_back( event );
+	m_events.AddEvent( event );
 }
 
 // ================================ //
 //
 inline void			KeyboardDevice::AddEvent		( const CharacterEvent& event )
 {
-	m_characters.push_back( event );
+	m_characters.AddEvent( event );
 }
 
 
