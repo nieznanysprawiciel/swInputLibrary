@@ -26,7 +26,7 @@ struct Keyboard
 	Numbers are the same as in DirectInput.
 
 	@ingroup Input*/
-	enum PHYSICAL_KEYS : uint8
+	enum PhysicalKeys : uint8
 	{
 		KEY_NONE			  = 0x00
 		, KEY_ESCAPE          = 0x01
@@ -212,7 +212,7 @@ There'ra aliases for them: LEFT_BUTTON, RIGHT_BUTTON, MIDDLE_BUTTON.
 Next numbers means rest of buttons which can exist on mouse device.
 
 @ingroup Input*/
-	enum PHYSICAL_BUTTONS : int8
+	enum PhysicalButtons : int8
 	{
 		BUTTON0 = 0,
 		BUTTON1 = 1,
@@ -231,7 +231,7 @@ Next numbers means rest of buttons which can exist on mouse device.
 
 	/**@brief Physical axes of mouse.
 	@ingroup Input*/
-	enum PHYSICAL_AXES : int8
+	enum PhysicalAxes : int8
 	{
 		X_AXIS = 0,
 		Y_AXIS = 1,
@@ -259,7 +259,7 @@ enum class DeviceEventType : uint8
 struct KeyEvent
 {
 	KeyState					State;			///< Only up or down state.
-	Keyboard::PHYSICAL_KEYS		Key;
+	Keyboard::PhysicalKeys		Key;
 	Timestamp					LogicalTime;	///< You can compare this counter with counters in other devices, to compare events order.
 												///< This doesn't work between frames.
 };
@@ -280,7 +280,7 @@ struct ButtonEvent
 	KeyState					State;			///< Only up or down state.
 	Timestamp					LogicalTime;	///< You can compare this counter with counters in other devices, to compare events order.
 												///< This doesn't work between frames.
-	Mouse::PHYSICAL_BUTTONS		Button;
+	Mouse::PhysicalButtons		Button;
 };
 
 /**@brief Mouse or joystick axis value changed event.
@@ -290,7 +290,7 @@ struct AxisEvent
 	float						Delta;			///< Axis delta.
 	Timestamp					LogicalTime;	///< You can compare this counter with counters in other devices, to compare events order.
 												///< This doesn't work between frames.
-	Mouse::PHYSICAL_AXES		Axis;
+	Mouse::PhysicalAxes			Axis;
 };
 
 /**@brief Cursor position changed event.

@@ -11,7 +11,7 @@
 #include "InputDeviceInfo.h"
 #include "InputDeviceEvent.h"
 
-#include <vector>
+#include <queue>
 
 
 namespace sw {

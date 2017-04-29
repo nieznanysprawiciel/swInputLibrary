@@ -25,6 +25,8 @@ namespace sw {
 namespace input
 {
 
+class EventCapture;
+
 
 /**@brief Initialization structure for input objects.
 
@@ -33,6 +35,7 @@ struct InputInitInfo
 {
 	AppInstanceHandle		AppInstance;
 	WindowHandle			WndHandle;
+	EventCapture*			EventCapturer;
 };
 
 
