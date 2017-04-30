@@ -7,6 +7,7 @@
 
 
 #include "swInputLibrary/InputCore/IInput.h"
+#include "swInputLibrary/InputCore/Device.h"
 
 
 namespace sw {
@@ -17,11 +18,29 @@ namespace input
 This class uses timestamp to sort events.*/
 class InputDispatcher
 {
+public:
+
+	struct DispatchedEvent
+	{
+		DeviceEvent		Event;
+		Device*			ProducerDevice;
+
+	// ================================ //
+	//
+		DispatchedEvent( Device* device, DeviceEvent evt )
+			:	Event( evt )
+			,	ProducerDevice( device )
+		{}
+	};
+
 private:
 
 	std::vector< KeyboardDeviceOPtr >&		m_keyboards;
 	std::vector< MouseDeviceOPtr >&			m_mouses;
 	std::vector< JoystickDeviceOPtr >&		m_joysticks;
+
+	Timestamp			m_nextTimestamp;
+	Timestamp			m_minTimestamp;
 
 protected:
 public:
@@ -29,12 +48,16 @@ public:
 					~InputDispatcher	() = default;
 
 
-	DeviceEvent			NextEvent		();
+	DispatchedEvent			NextEvent		();
 
 
 	std::vector< KeyboardDeviceOPtr >&		GetKeyboards	() { return m_keyboards; }
 	std::vector< MouseDeviceOPtr >&			GetMouses		() { return m_mouses; }
 	std::vector< JoystickDeviceOPtr >&		GetJoysticks	() { return m_joysticks; }
+
+private:
+
+
 };
 
 
@@ -47,16 +70,27 @@ inline		InputDispatcher::InputDispatcher		( IInput* input )
 	:	m_keyboards( input->GetKeyboardDevice() )
 	,	m_mouses( input->GetMouseDevice() )
 	,	m_joysticks( input->GetJoystickDevice() )
+	,	m_nextTimestamp( 0 )
+	,	m_minTimestamp( std::numeric_limits< Timestamp >::max() )
 {
 
 }
 
 // ================================ //
 //
-inline DeviceEvent		InputDispatcher::NextEvent()
+inline InputDispatcher::DispatchedEvent		InputDispatcher::NextEvent()
 {
+	for( int i = 0; i < m_keyboards.size(); i++ )
+	{
+		if( m_keyboards[ i ]->GetEventsQueue().FrontEvent().LogicalTime == m_nextTimestamp )
+		{
+
+		}
+	}
+
+
 	assert( !"Implement me" );
-	return DeviceEvent( KeyEvent() );
+	return InputDispatcher::DispatchedEvent( nullptr, KeyEvent() );
 }
 
 }	// input

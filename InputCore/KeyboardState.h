@@ -42,7 +42,7 @@ public:
 	///@}
 
 	/**@brief Sets state depending on event.*/
-	void						ApplyEvent		( const KeyEvent& event );
+	void						ApplyEvent		( const DeviceEvent& event );
 
 public:
 
@@ -72,10 +72,14 @@ inline void		KeyboardState::RemoveEvents	()
 
 // ================================ //
 //
-inline void		KeyboardState::ApplyEvent		( const KeyEvent& event )
+inline void		KeyboardState::ApplyEvent		( const DeviceEvent& event )
 {
-	KeyState& state = m_keyboardState[ event.Key ];
-	state = event.State.IsPressed();
+	if( event.Type == DeviceEventType::KeyboardEvent )
+	{
+		const KeyEvent& keyEvent = event.Key;
+		KeyState& state = m_keyboardState[ keyEvent.Key ];
+		state = keyEvent.State.IsPressed();
+	}
 }
 
 

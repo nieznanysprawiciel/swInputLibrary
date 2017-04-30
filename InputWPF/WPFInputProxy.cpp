@@ -349,9 +349,8 @@ void			WPFInputProxy::KeyboardChange		( int keyId, bool pressed )
 	KeyEvent keyEvent;
 	keyEvent.Key = KEYBOARD_BUTTONS_MAPPING[ keyId ];
 	keyEvent.State = pressed;
-	keyEvent.LogicalTime = m_eventNum++;
 
-	m_keyboards[ 0 ]->AddEvent( keyEvent );
+	m_keyboards[ 0 ]->AddEvent( DeviceEvent( keyEvent, m_eventNum++ ) );
 }
 
 /**@brief Ustawia nowy stan przycisku myszy.
@@ -370,9 +369,8 @@ void			WPFInputProxy::MouseButtonChange		( int button, bool pressed )
 	ButtonEvent mouseButtonEvt;
 	mouseButtonEvt.Button = MOUSE_BUTTONS_MAPPING[ button ];
 	mouseButtonEvt.State = pressed;
-	mouseButtonEvt.LogicalTime = m_eventNum++;
 
-	m_mouses[ 0 ]->AddEvent( mouseButtonEvt );
+	m_mouses[ 0 ]->AddEvent( DeviceEvent( mouseButtonEvt, m_eventNum++ )  );
 }
 
 /**@brief Ustawia now¹ pozycjê myszy.*/
@@ -386,9 +384,8 @@ void			WPFInputProxy::MousePositionChange		( double X, double Y )
 	CursorEvent cursorEvent;
 	cursorEvent.OffsetX = (uint16)X - m_lastX;
 	cursorEvent.OffsetY = (uint16)Y - m_lastY;
-	cursorEvent.LogicalTime = m_eventNum++;
 
-	m_mouses[ 0 ]->AddEvent( cursorEvent );
+	m_mouses[ 0 ]->AddEvent( DeviceEvent( cursorEvent, m_eventNum++ ) );
 
 	m_lastX = (uint16)X;
 	m_lastY = (uint16)Y;
@@ -396,18 +393,16 @@ void			WPFInputProxy::MousePositionChange		( double X, double Y )
 	// Change in mouse position is translated into axis change.
 	// Theoretically it's the same event but better give it a new number.
 	AxisEvent cursorAxisX;
-	cursorAxisX.LogicalTime = m_eventNum++;
 	cursorAxisX.Delta = cursorEvent.OffsetX;
 	cursorAxisX.Axis = Mouse::PhysicalAxes::X_AXIS;
 
-	m_mouses[ 0 ]->AddEvent( cursorAxisX );
+	m_mouses[ 0 ]->AddEvent( DeviceEvent( cursorAxisX, m_eventNum++ ) );
 
 	AxisEvent cursorAxisY;
-	cursorAxisY.LogicalTime = m_eventNum++;
 	cursorAxisY.Delta = cursorEvent.OffsetY;
 	cursorAxisY.Axis = Mouse::PhysicalAxes::Y_AXIS;
 
-	m_mouses[ 0 ]->AddEvent( cursorAxisY );
+	m_mouses[ 0 ]->AddEvent( DeviceEvent( cursorAxisY, m_eventNum++ ) );
 }
 
 /**@brief Ustawia przesuniêcie kó³ka myszy.*/
@@ -419,9 +414,8 @@ void			WPFInputProxy::MouseWheelChange			( double delta )
 	AxisEvent wheel;
 	wheel.Delta = (float)delta;
 	wheel.Axis = Mouse::PhysicalAxes::WHEEL;
-	wheel.LogicalTime = m_eventNum++;
 
-	m_mouses[ 0 ]->AddEvent( DeviceEvent( wheel ) );
+	m_mouses[ 0 ]->AddEvent( DeviceEvent( wheel, m_eventNum++ ) );
 }
 
 /**@brief Poniewa¿ okno straci³o focus to czyœcimy stan przycisków i myszy.
@@ -443,9 +437,8 @@ void			WPFInputProxy::PostUpdate()
 	AxisEvent wheel;
 	wheel.Delta = (float)-mouse->GetState().GetAxesState()[ Mouse::PhysicalAxes::WHEEL ];
 	wheel.Axis = Mouse::PhysicalAxes::WHEEL;
-	wheel.LogicalTime = m_eventNum++;
 
-	m_mouses[ 0 ]->AddEvent( DeviceEvent( wheel ) );
+	m_mouses[ 0 ]->AddEvent( DeviceEvent( wheel, m_eventNum++ ) );
 
 	//for( auto& keyboard : m_keyboards )
 	//	keyboard->RemoveEvents();

@@ -44,8 +44,7 @@ private:
 	InputDeviceInfo		m_info;
 	KeyboardState		m_state;
 
-	EventQueue< KeyEvent >			m_events;
-	EventQueue< CharacterEvent >	m_characters;
+	EventQueue< DeviceEvent >		m_events;
 
 protected:
 public:
@@ -56,10 +55,11 @@ public:
 	const InputDeviceInfo&		GetInfo			() const	{ return m_info; }
 	const KeyboardState&		GetState		() const	{ return m_state; }
 
-	EventQueue< KeyEvent >&				GetEventsQueue		()			{ return m_events; }
-	EventQueue< CharacterEvent >&		GetCharactersQueue	()			{ return m_characters; }
+	EventQueue< DeviceEvent >&			GetEventsQueue		()			{ return m_events; }
 
-	void						ApplyAllEvents	();
+	void						ApplyAllEvents				();
+	DeviceEvent					ApplyNextEvent				();
+	Timestamp					GetNextEvtTimestamp			();
 
 public:
 
@@ -68,8 +68,7 @@ public:
 
 	/**@brief Add event to event queue.
 	This function doesn't change KeyboardState.*/
-	void			AddEvent		( const KeyEvent& event );
-	void			AddEvent		( const CharacterEvent& event );
+	void			AddEvent		( const DeviceEvent& event );
 
 	///@}
 
@@ -89,26 +88,39 @@ inline void			KeyboardDevice::ApplyAllEvents	()
 	while( !m_events.NoMoreEvents() )
 	{
 		auto& event = m_events.PopEvent();
-		m_state.ApplyEvent( event );
+		
+		// Characters don't influence KeyboardState.
+		if( event.Type == DeviceEventType::KeyboardEvent )
+			m_state.ApplyEvent( event );
 	}
-
-	// Characters don't influence KeyboardState.
-	while( !m_characters.NoMoreEvents() )
-		m_characters.PopEvent();
 }
 
 // ================================ //
 //
-inline void			KeyboardDevice::AddEvent		( const KeyEvent& event )
+inline DeviceEvent	KeyboardDevice::ApplyNextEvent()
+{
+	if( m_events.NoMoreEvents() )
+		return DeviceEvent();
+
+
+	auto& nextEvent = m_events.PopEvent();
+	m_state.ApplyEvent( nextEvent );
+
+	return nextEvent;
+}
+
+// ================================ //
+//
+inline Timestamp	KeyboardDevice::GetNextEvtTimestamp()
+{
+	return m_events.FrontEvent().LogicalTime;
+}
+
+// ================================ //
+//
+inline void			KeyboardDevice::AddEvent		( const DeviceEvent& event )
 {
 	m_events.AddEvent( event );
-}
-
-// ================================ //
-//
-inline void			KeyboardDevice::AddEvent		( const CharacterEvent& event )
-{
-	m_characters.AddEvent( event );
 }
 
 

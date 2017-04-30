@@ -44,7 +44,9 @@ public:
 
 	EventQueue< DeviceEvent >&	GetEventsQueue	()			{ return m_events; }
 
-	void						ApplyAllEvents	();
+	void						ApplyAllEvents			();
+	DeviceEvent					ApplyNextEvent			();
+	Timestamp					GetNextEvtTimestamp		();
 
 public:
 	///@name Functions for setting state (only for IInput)
@@ -53,9 +55,6 @@ public:
 	/**@brief Add event to event queue.
 	This function doesn't change KeyboardState.*/
 	void			AddEvent		( const DeviceEvent& event );
-	void			AddEvent		( const ButtonEvent& event );
-	void			AddEvent		( const AxisEvent& event );
-	void			AddEvent		( const CursorEvent& event );
 
 	///@}
 };
@@ -80,31 +79,25 @@ inline void			MouseDevice::ApplyAllEvents	()
 
 // ================================ //
 //
+inline DeviceEvent	MouseDevice::ApplyNextEvent()
+{
+	return DeviceEvent();
+}
+
+inline Timestamp	MouseDevice::GetNextEvtTimestamp()
+{
+	return m_events.FrontEvent().LogicalTime;
+}
+
+// ================================ //
+//
 inline void			MouseDevice::AddEvent		( const DeviceEvent& event )
 {
 	m_events.AddEvent( event );
 }
 
-// ================================ //
-//
-inline void			MouseDevice::AddEvent		( const ButtonEvent& event )
-{
-	AddEvent( DeviceEvent( event ) );
-}
 
-// ================================ //
-//
-inline void			MouseDevice::AddEvent		( const AxisEvent& event )
-{
-	AddEvent( DeviceEvent( event ) );
-}
 
-// ================================ //
-//
-inline void			MouseDevice::AddEvent		( const CursorEvent& event )
-{
-	AddEvent( DeviceEvent( event ) );
-}
 
 }	// input
 }	// sw

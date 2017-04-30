@@ -248,9 +248,12 @@ Next numbers means rest of buttons which can exist on mouse device.
 enum class DeviceEventType : uint8
 {
 	KeyboardEvent,
+	CharacterEvent,
 	ButtonEvent,
 	AxisEvent,
-	CursorEvent
+	CursorEvent,
+
+	InvalidEvent
 };
 
 	
@@ -260,8 +263,6 @@ struct KeyEvent
 {
 	KeyState					State;			///< Only up or down state.
 	Keyboard::PhysicalKeys		Key;
-	Timestamp					LogicalTime;	///< You can compare this counter with counters in other devices, to compare events order.
-												///< This doesn't work between frames.
 };
 
 /**@brief Keyboard event after translation to character.
@@ -269,8 +270,6 @@ struct KeyEvent
 struct CharacterEvent
 {
 	wchar_t			Character;
-	Timestamp		LogicalTime;	///< You can compare this counter with counters in other devices, to compare events order.
-									///< This doesn't work between frames.
 };
 
 /**@brief Mouse button Change event.
@@ -278,8 +277,6 @@ struct CharacterEvent
 struct ButtonEvent
 {
 	KeyState					State;			///< Only up or down state.
-	Timestamp					LogicalTime;	///< You can compare this counter with counters in other devices, to compare events order.
-												///< This doesn't work between frames.
 	Mouse::PhysicalButtons		Button;
 };
 
@@ -288,8 +285,6 @@ struct ButtonEvent
 struct AxisEvent
 {
 	float						Delta;			///< Axis delta.
-	Timestamp					LogicalTime;	///< You can compare this counter with counters in other devices, to compare events order.
-												///< This doesn't work between frames.
 	Mouse::PhysicalAxes			Axis;
 };
 
@@ -299,8 +294,6 @@ struct CursorEvent
 {
 	short				OffsetX;
 	short				OffsetY;
-	Timestamp			LogicalTime;	///< You can compare this counter with counters in other devices, to compare events order.
-										///< This doesn't work between frames.
 };
 
 /**@brief KeyStates changed events.
@@ -315,32 +308,53 @@ struct DeviceEvent
 		AxisEvent		Axis;
 		CursorEvent		Cursor;
 	};
+
 	DeviceEventType		Type;
+	Timestamp			LogicalTime;	///< You can compare this counter with counters in other devices, to compare events order.
+										///< This doesn't work between frames.
+
 
 // ================================ //
 //
-	DeviceEvent( KeyEvent evt )
+	DeviceEvent()
+	{
+		Type = DeviceEventType::InvalidEvent;
+		LogicalTime = std::numeric_limits< Timestamp >::max();
+	}
+
+	DeviceEvent( KeyEvent evt, Timestamp timestamp )
 	{
 		Type = DeviceEventType::KeyboardEvent;
 		Key = evt;
+		LogicalTime = timestamp;
 	}
 
-	DeviceEvent( ButtonEvent evt )
+	DeviceEvent( CharacterEvent evt, Timestamp timestamp )
+	{
+		Type = DeviceEventType::CharacterEvent;
+		Character = evt;
+		LogicalTime = timestamp;
+	}
+
+	DeviceEvent( ButtonEvent evt, Timestamp timestamp )
 	{
 		Type = DeviceEventType::KeyboardEvent;
 		Button = evt;
+		LogicalTime = timestamp;
 	}
 
-	DeviceEvent( AxisEvent evt )
+	DeviceEvent( AxisEvent evt, Timestamp timestamp )
 	{
 		Type = DeviceEventType::KeyboardEvent;
 		Axis = evt;
+		LogicalTime = timestamp;
 	}
 
-	DeviceEvent( CursorEvent evt )
+	DeviceEvent( CursorEvent evt, Timestamp timestamp )
 	{
 		Type = DeviceEventType::KeyboardEvent;
 		Cursor = evt;
+		LogicalTime = timestamp;
 	}
 };
 
