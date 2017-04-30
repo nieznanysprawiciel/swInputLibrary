@@ -42,7 +42,9 @@ public:
 	const InputDeviceInfo&		GetInfo			() const { return m_info; }
 	const JoystickState&		GetState		() const { return m_state; }
 
-	void						ApplyAllEvents	();
+	void						ApplyAllEvents				();
+	DeviceEvent					ApplyNextEvent				();
+	Timestamp					GetNextEvtTimestamp			();
 
 	EventQueue< DeviceEvent >&		GetEventsQueue		()			{ return m_events; }
 };
@@ -64,6 +66,21 @@ inline void			JoystickDevice::ApplyAllEvents	()
 		auto& event = m_events.PopEvent();
 		//m_state.ApplyEvent( event );
 	}
+}
+
+// ================================ //
+// @todo Implement
+inline DeviceEvent	JoystickDevice::ApplyNextEvent()
+{
+	m_events.PopEvent();
+	return DeviceEvent();
+}
+
+// ================================ //
+// @todo implment
+inline Timestamp	JoystickDevice::GetNextEvtTimestamp()
+{
+	return std::numeric_limits< Timestamp >::max();
 }
 
 
