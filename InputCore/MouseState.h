@@ -44,6 +44,15 @@ public:
 
 	void						SetPosition			( short X, short Y );
 
+
+	const KeyState*				LeftButton		() const;
+	const KeyState*				RightButton		() const;
+	const KeyState*				MiddleButton	() const;
+	const KeyState*				XButton1		() const;
+	const KeyState*				XButton2		() const;
+
+	const KeyState&				operator[]		( Mouse::PhysicalButtons button ) const { m_buttons[ button ]; }
+
 	///@name Functions for setting state (only for IInput)
 	///@{
 	void						RemoveEvents	();
@@ -136,6 +145,45 @@ inline void			MouseState::ApplyEvent		( const DeviceEvent& event )
 	}
 }
 
+
+//====================================================================================//
+//			Helper accessor	
+//====================================================================================//
+
+// ================================ //
+//
+inline const KeyState*		MouseState::LeftButton() const
+{
+	return &m_buttons[ Mouse::LEFT_BUTTON ];
+}
+
+// ================================ //
+//
+inline const KeyState*		MouseState::RightButton() const
+{
+	return &m_buttons[ Mouse::RIGHT_BUTTON ];
+}
+
+// ================================ //
+//
+inline const KeyState*		MouseState::MiddleButton() const
+{
+	return &m_buttons[ Mouse::MIDDLE_BUTTON ];
+}
+
+// ================================ //
+//
+inline const KeyState*		MouseState::XButton1() const
+{
+	return &m_buttons[ Mouse::BUTTON3 ];
+}
+
+// ================================ //
+//
+inline const KeyState*		MouseState::XButton2() const
+{
+	return &m_buttons[ Mouse::BUTTON4 ];
+}
 
 
 }	// input

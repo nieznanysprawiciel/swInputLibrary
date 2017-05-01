@@ -40,8 +40,8 @@ public:
 
 	/**@brief Removes all events after m_readPointer.*/
 	inline void		ClearReadEvents	();
-	inline bool		NoMoreEvents	() const						{ return m_events.size() <= m_readPointer; }
-	inline uint32	EventsLeft		() const						{ return m_events.size() - m_readPointer; }
+	inline bool		NoMoreEvents	() const						{ return (uint32)m_events.size() <= m_readPointer; }
+	inline uint32	EventsLeft		() const						{ return (uint32)m_events.size() - m_readPointer; }
 
 	/**@brief Reads next event without moving read pointer.
 	Always check if there're any events in queue left.*/

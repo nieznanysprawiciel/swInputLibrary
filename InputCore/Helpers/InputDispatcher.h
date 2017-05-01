@@ -138,6 +138,8 @@ inline InputDispatcher::DispatchedEvent		InputDispatcher::FindEvent		( Timestamp
 		if( m_joysticks[ i ]->GetNextEvtTimestamp() == timestamp )
 			return DispatchedEvent( m_joysticks[ i ].get(), m_joysticks[ i ]->ApplyNextEvent() );
 	}
+
+	return InputDispatcher::DispatchedEvent( nullptr, DeviceEvent() );
 }
 
 // ================================ //

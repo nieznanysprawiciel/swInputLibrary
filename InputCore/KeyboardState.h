@@ -33,7 +33,12 @@ public:
 	explicit		KeyboardState	();
 					~KeyboardState	();
 
+	/**@brief Gets array with keyboard state. Array has size KEYBOARD_STATE_KEYS_NUMBER.
+	You can use Keyboard::PhysicalKeys to acces individual elements.*/
 	const KeyState*				GetKeyboardState() const { return m_keyboardState; }
+
+	/**@brief Access state of specific key.*/
+	const KeyState&				operator[]		( Keyboard::PhysicalKeys key ) const		{ m_keyboardState[ key ]; }
 
 	///@name Funkcje do ustawiania stanu (tylko dla dzieci IInput)
 	///@{

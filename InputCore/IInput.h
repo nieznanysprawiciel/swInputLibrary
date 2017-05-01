@@ -42,8 +42,11 @@ struct InputInitInfo
 
 /**@brief Interface for input classes for capturing user input.
 
-@todo Uzupe³niæ interfejs i wydzieliæ modu³y obs³uguj¹ce konkretne implementacje
-urz¹dzeñ wejœciowych.*/
+@todo Deal with situation when we must have two different IInput objects to handle input. For example
+WinAPI deals with keyboard and mouse and other IINput with Joysticks.
+
+@todo We must think about handling other devices. For example WPF have such types as StylusDevice, TouchDevice and TabletDevice.
+Can we do it as combinations of keyboard, mouse and joysticks or we must introduce new API for that.*/
 class IInput
 {
 private:
