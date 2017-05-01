@@ -44,6 +44,7 @@ public:
 
 	void						SetPosition			( short X, short Y );
 
+	float						WheelDelta		() const { m_axes[ Mouse::PhysicalAxes::WHEEL ]; }
 
 	const KeyState*				LeftButton		() const;
 	const KeyState*				RightButton		() const;
