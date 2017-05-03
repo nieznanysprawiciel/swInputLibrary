@@ -38,7 +38,7 @@ public:
 	const KeyState*				GetKeyboardState() const { return m_keyboardState; }
 
 	/**@brief Access state of specific key.*/
-	const KeyState&				operator[]		( Keyboard::PhysicalKeys key ) const		{ m_keyboardState[ key ]; }
+	const KeyState&				operator[]		( Keyboard::PhysicalKeys key ) const		{ return m_keyboardState[ key ]; }
 
 	///@name Funkcje do ustawiania stanu (tylko dla dzieci IInput)
 	///@{
