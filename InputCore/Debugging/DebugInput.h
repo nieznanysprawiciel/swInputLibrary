@@ -7,14 +7,23 @@
 
 #include "swInputLibrary/InputCore/IInput.h"
 
+#include "swInputLibrary/InputCore/Debugging/EventCapture.h"
+
 
 namespace sw {
 namespace input
 {
 
+/**@defgroup DebugInput
+@brief Classes created for test purposes.
+You can use it to load bunch of events from disk, write them from code
+@ingroup Input*/
+
+
 /**@brief Input class for testing and debugging.
 
-This class can fake input by reading events form @ref EventCapture object.*/
+This class can fake input by reading events form @ref EventCapture object.
+@ingroup DebugInput*/
 class DebugInput : public IInput
 {
 private:
@@ -26,6 +35,11 @@ private:
 	std::vector< KeyboardDeviceOPtr >	m_keyboards;	///< Only first element is in use now.
 	std::vector< MouseDeviceOPtr >		m_mouses;		///< Only first element is in use now.
 	std::vector< JoystickDeviceOPtr >	m_joysticks;	///< Only first element is in use now.
+
+	Timestamp		m_eventNum;							///< Number of event in current frame.
+	Size			m_frameNumber;
+
+	EventCapture*	m_eventCapture;
 
 protected:
 public:

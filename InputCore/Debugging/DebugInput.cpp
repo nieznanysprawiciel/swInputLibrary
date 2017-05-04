@@ -24,6 +24,10 @@ bool			DebugInput::Init		( const InputInitInfo& initInfo )
 	m_mousesStates.push_back( &m_mouses[ 0 ]->GetState() );
 	m_joysticksStates.push_back( &m_joysticks[ 0 ]->GetState() );
 
+	m_frameNumber = 0;
+	m_eventCapture = initInfo.EventCapturer;
+
+
 	return true;
 }
 
@@ -80,7 +84,39 @@ std::vector< const InputDeviceInfo* >	DebugInput::GetDevicesInfo		() const
 // ================================ //
 //
 void											DebugInput::Update				( float timeInterval )
-{}
+{
+	m_eventNum = 0;
+	
+	for( auto& keyboard : m_keyboards )
+		keyboard->RemoveEvents();
+
+	for( auto& mouse : m_mouses )
+		mouse->RemoveEvents();
+
+	for( auto& joystick : m_joysticks )
+		joystick->RemoveEvents();
+
+	while( m_eventCapture->IsNext( m_frameNumber ) )
+	{
+		auto& event = m_eventCapture->QueryEvent( m_frameNumber );
+		switch( event.EventContent.Type )
+		{
+			case DeviceEventType::KeyboardEvent:
+			case DeviceEventType::CharacterEvent:
+				m_keyboards[ event.DeviceIdx ]->AddEvent( event.EventContent );
+				break;
+			case DeviceEventType::AxisEvent:
+			case DeviceEventType::ButtonEvent:
+			case DeviceEventType::CursorEvent:
+				m_mouses[ event.DeviceIdx ]->AddEvent( event.EventContent );
+				break;
+			default:
+				break;
+		}
+	}
+
+	m_frameNumber++;
+}
 
 // ================================ //
 //

@@ -21,8 +21,13 @@ namespace sw {
 namespace input
 {
 
+/**@defgroup WinAPIInput
+@ingroup Input*/
 
-/**@brief Klasa do przekierowywania do silnika wejœcia pobranego z WPFa.*/
+
+/**@brief Klasa do przekierowywania do silnika wejœcia pobranego z WPFa.
+
+@ingroup WinAPIInput*/
 class WinApiInputProxy : public IInput
 {
 private:

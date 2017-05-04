@@ -48,6 +48,8 @@ public:
 	DeviceEvent					ApplyNextEvent			();
 	Timestamp					GetNextEvtTimestamp		();
 
+	void						RemoveEvents			();
+
 public:
 	///@name Functions for setting state (only for IInput)
 	///@{
@@ -84,10 +86,21 @@ inline DeviceEvent	MouseDevice::ApplyNextEvent()
 	return DeviceEvent();
 }
 
+// ================================ //
+//
 inline Timestamp	MouseDevice::GetNextEvtTimestamp()
 {
 	return m_events.FrontEvent().LogicalTime;
 }
+
+// ================================ //
+//
+inline void			MouseDevice::RemoveEvents		()
+{
+	m_state.RemoveEvents();
+	m_events.ClearReadEvents();
+}
+
 
 // ================================ //
 //

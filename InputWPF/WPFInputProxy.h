@@ -17,9 +17,14 @@ namespace sw {
 namespace input
 {
 
+/**@defgroup WPFInput
+@ingroup Input*/
 
 
-/**@brief Klasa do przekierowywania do silnika wejœcia pobranego z WPFa.*/
+
+/**@brief Klasa do przekierowywania do silnika wejœcia pobranego z WPFa.
+
+@ingroup WPFInput*/
 class WPFInputProxy : public IInput
 {
 private:

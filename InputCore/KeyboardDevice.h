@@ -61,6 +61,8 @@ public:
 	DeviceEvent					ApplyNextEvent				();
 	Timestamp					GetNextEvtTimestamp			();
 
+	void						RemoveEvents				();
+
 public:
 
 	///@name Functions for setting state (only for IInput)
@@ -115,6 +117,15 @@ inline Timestamp	KeyboardDevice::GetNextEvtTimestamp()
 {
 	return m_events.FrontEvent().LogicalTime;
 }
+
+// ================================ //
+//
+inline void			KeyboardDevice::RemoveEvents		()
+{
+	m_state.RemoveEvents();
+	m_events.ClearReadEvents();
+}
+
 
 // ================================ //
 //

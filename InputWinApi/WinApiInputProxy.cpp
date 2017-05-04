@@ -94,11 +94,11 @@ void		WinApiInputProxy::Update( float timeInterval )
 {
 	m_eventNum = 0;
 
-	//for( auto& keyboard : m_keyboards )
-	//	keyboard->RemoveEvents();
+	for( auto& keyboard : m_keyboards )
+		keyboard->RemoveEvents();
 
-	//for( auto& mouse : m_mouses )
-	//	mouse->RemoveEvents();
+	for( auto& mouse : m_mouses )
+		mouse->RemoveEvents();
 }
 
 /**@copydoc IInput::UpdateDevices

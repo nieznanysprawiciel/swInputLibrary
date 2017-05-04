@@ -46,7 +46,11 @@ struct InputInitInfo
 WinAPI deals with keyboard and mouse and other IINput with Joysticks.
 
 @todo We must think about handling other devices. For example WPF have such types as StylusDevice, TouchDevice and TabletDevice.
-Can we do it as combinations of keyboard, mouse and joysticks or we must introduce new API for that.*/
+Can we do it as combinations of keyboard, mouse and joysticks or we must introduce new API for that.
+
+@todo DirectInput should be created one per window. In this moment we have one input in whole application. We must rethink it.
+
+@ingroup Input*/
 class IInput
 {
 private:

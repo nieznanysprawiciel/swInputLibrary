@@ -356,6 +356,16 @@ struct DeviceEvent
 		Cursor = evt;
 		LogicalTime = timestamp;
 	}
+
+	DeviceEvent( const DeviceEvent& second )
+	{
+		memcpy( this, &second, sizeof( DeviceEvent ) );
+	}
+
+	void operator=( const DeviceEvent& second )
+	{
+		memcpy( this, &second, sizeof( DeviceEvent ) );
+	}
 };
 
 

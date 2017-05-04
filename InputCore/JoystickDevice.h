@@ -46,6 +46,8 @@ public:
 	DeviceEvent					ApplyNextEvent				();
 	Timestamp					GetNextEvtTimestamp			();
 
+	void						RemoveEvents				();
+
 	EventQueue< DeviceEvent >&		GetEventsQueue		()			{ return m_events; }
 };
 
@@ -81,6 +83,14 @@ inline DeviceEvent	JoystickDevice::ApplyNextEvent()
 inline Timestamp	JoystickDevice::GetNextEvtTimestamp()
 {
 	return std::numeric_limits< Timestamp >::max();
+}
+
+// ================================ //
+//
+inline void			JoystickDevice::RemoveEvents		()
+{
+	m_state.RemoveEvents();
+	m_events.ClearReadEvents();
 }
 
 

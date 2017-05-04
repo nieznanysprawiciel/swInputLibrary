@@ -24,6 +24,8 @@ public:
 	JoystickState();
 	~JoystickState();
 
+
+	void		RemoveEvents	();
 };
 
 // ================================ //
@@ -36,6 +38,11 @@ inline JoystickState::JoystickState()
 inline JoystickState::~JoystickState()
 {}
 
+
+// ================================ //
+//
+inline void			JoystickState::RemoveEvents	()
+{}
 
 }	// input
 }	// sw

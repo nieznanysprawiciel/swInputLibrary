@@ -12,12 +12,19 @@ namespace input
 {
 
 
+
+/**@defgroup DirectInput
+@ingroup Input*/
+
+
 /**@brief Klasa obs³uguj¹ca wejœcie u¿ytkownika.
 
 U¿ywa interfejsu Direct Inputa.
 
 @todo Zrobiæ obs³ugê wielu urz¹dzeñ tego samego typu i jousticka.
-@todo Pozbyæ siê includowania direct input z EngineCore.*/
+@todo Pozbyæ siê includowania direct input z EngineCore.
+
+@ingroup DirectInput*/
 class DirectInputModule : public IInput
 {
 private:
