@@ -116,6 +116,7 @@ void											DebugInput::Update				( float timeInterval )
 	}
 
 	m_frameNumber++;
+	m_eventCapture->GoToNextFrame();
 }
 
 // ================================ //

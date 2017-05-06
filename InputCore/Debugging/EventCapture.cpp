@@ -1,3 +1,8 @@
+#include "EventCapture.h"
+#include "EventCapture.h"
+#include "EventCapture.h"
+#include "EventCapture.h"
+#include "EventCapture.h"
 /**
 @file EventCapture.cpp
 @author nieznanysprawiciel
@@ -13,6 +18,45 @@ namespace input
 
 
 
+
+// ================================ //
+//
+EventCapture::EventCapture()
+	:	m_nextTimeStamp( 0 )
+	,	m_frameNumber( 0 )
+{}
+
+// ================================ //
+//
+void			EventCapture::QueueUpKeyEvent	( Keyboard::PhysicalKeys key )
+{
+	KeyState state;
+	state.UnPress();
+
+	QueueKeyEvent( state, key );
+}
+
+// ================================ //
+//
+void			EventCapture::QueueDownKeyEvent	( Keyboard::PhysicalKeys key )
+{
+	KeyState state;
+	state.Press();
+
+	QueueKeyEvent( state, key );
+}
+
+// ================================ //
+//
+void			EventCapture::QueueKeyEvent		( KeyState state, Keyboard::PhysicalKeys key )
+{
+	KeyEvent keyEvent;
+	keyEvent.State = state;
+	keyEvent.Key = key;
+
+	DeviceEvent newEvent( keyEvent, m_nextTimeStamp++ );
+	QueueEvent( newEvent, m_frameNumber, DeviceEventType::KeyboardEvent, 0 );
+}
 
 // ================================ //
 //
@@ -52,6 +96,14 @@ const DebugEvent&	EventCapture::QueryEvent	( Size frameNum )
 bool				EventCapture::IsNext		( Size frameNum )
 {
 	return m_events.FrontEvent().FrameNumber == frameNum;
+}
+
+// ================================ //
+//
+void				EventCapture::GoToNextFrame	()
+{
+	m_nextTimeStamp = 0;
+	m_frameNumber++;
 }
 
 }	// input

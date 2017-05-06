@@ -39,17 +39,37 @@ class EventCapture
 private:
 
 	EventQueue< DebugEvent >		m_events;
+	
+	Size			m_frameNumber;
+	Timestamp		m_nextTimeStamp;
 
 protected:
 public:
-	explicit		EventCapture		() = default;
+	explicit		EventCapture		();
 					~EventCapture		() = default;
+
+	///@name Manually add events.
+	///@{
+
+	/**@brief Adds key event to current frame and gives it next timstamp.*/
+	void			QueueUpKeyEvent		( Keyboard::PhysicalKeys key );
+	void			QueueDownKeyEvent	( Keyboard::PhysicalKeys key );
+	void			QueueKeyEvent		( KeyState state, Keyboard::PhysicalKeys key );
+	///@}
+
+public:
+
+	///@name For DebugInput
+	///@{
+	void					GoToNextFrame		();
+
+	const DebugEvent&		QueryEvent			( Size frameNum );
+	bool					IsNext				( Size frameNum );
 
 	void			QueueEvent			( const DeviceEvent& event, Size frameNum, DeviceEventType deviceType, uint8 deviceIdx = 0 );
 	void			QueueEvent			( const DebugEvent& event );
+	///@}
 
-	const DebugEvent&		QueryEvent	( Size frameNum );
-	bool					IsNext		( Size frameNum );
 };
 
 

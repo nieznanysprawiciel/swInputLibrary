@@ -53,7 +53,7 @@ public:
 
 	inline void		operator=		( KeyState newState )
 	{
-		assert( !"" );
+		m_state = newState.m_state;
 	}
 
 public:
