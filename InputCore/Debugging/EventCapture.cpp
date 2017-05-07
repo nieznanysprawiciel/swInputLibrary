@@ -95,6 +95,9 @@ const DebugEvent&	EventCapture::QueryEvent	( Size frameNum )
 //
 bool				EventCapture::IsNext		( Size frameNum )
 {
+	if( m_events.NoMoreEvents() )
+		return false;
+
 	return m_events.FrontEvent().FrameNumber == frameNum;
 }
 

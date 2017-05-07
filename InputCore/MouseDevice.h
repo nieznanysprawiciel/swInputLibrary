@@ -83,6 +83,7 @@ inline void			MouseDevice::ApplyAllEvents	()
 //
 inline DeviceEvent	MouseDevice::ApplyNextEvent()
 {
+	assert( !"Implement me" );
 	return DeviceEvent();
 }
 
@@ -90,6 +91,9 @@ inline DeviceEvent	MouseDevice::ApplyNextEvent()
 //
 inline Timestamp	MouseDevice::GetNextEvtTimestamp()
 {
+	if( m_events.NoMoreEvents() )
+		return std::numeric_limits< Timestamp >::max();
+
 	return m_events.FrontEvent().LogicalTime;
 }
 
