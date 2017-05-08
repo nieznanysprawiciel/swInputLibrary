@@ -225,6 +225,8 @@ Next numbers means rest of buttons which can exist on mouse device.
 		LEFT_BUTTON = BUTTON0,
 		RIGHT_BUTTON = BUTTON1,
 		MIDDLE_BUTTON = BUTTON2,
+		XBUTTON1 = BUTTON3,
+		XBUTTON2 = BUTTON4,
 
 		NONE = 8,
 	};

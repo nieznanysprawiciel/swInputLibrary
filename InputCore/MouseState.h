@@ -176,14 +176,14 @@ inline const KeyState*		MouseState::MiddleButton() const
 //
 inline const KeyState*		MouseState::XButton1() const
 {
-	return &m_buttons[ Mouse::BUTTON3 ];
+	return &m_buttons[ Mouse::XBUTTON1 ];
 }
 
 // ================================ //
 //
 inline const KeyState*		MouseState::XButton2() const
 {
-	return &m_buttons[ Mouse::BUTTON4 ];
+	return &m_buttons[ Mouse::XBUTTON2 ];
 }
 
 
