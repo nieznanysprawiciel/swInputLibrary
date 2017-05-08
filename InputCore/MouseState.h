@@ -52,7 +52,7 @@ public:
 	const KeyState*				XButton1		() const;
 	const KeyState*				XButton2		() const;
 
-	const KeyState&				operator[]		( Mouse::PhysicalButtons button ) const { m_buttons[ button ]; }
+	const KeyState&				operator[]		( Mouse::PhysicalButtons button ) const { return m_buttons[ button ]; }
 
 	///@name Functions for setting state (only for IInput)
 	///@{

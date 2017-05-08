@@ -256,6 +256,15 @@ enum class DeviceEventType : uint8
 	InvalidEvent
 };
 
+/**@brief Input device types.
+@ingroup Input*/
+enum class DeviceType : uint8
+{
+	Keyboard,
+	Mouse,
+	Joystick
+};
+
 	
 /**@brief Keyboard key change event.
 @ingroup Input*/
@@ -338,21 +347,21 @@ struct DeviceEvent
 
 	DeviceEvent( ButtonEvent evt, Timestamp timestamp )
 	{
-		Type = DeviceEventType::KeyboardEvent;
+		Type = DeviceEventType::ButtonEvent;
 		Button = evt;
 		LogicalTime = timestamp;
 	}
 
 	DeviceEvent( AxisEvent evt, Timestamp timestamp )
 	{
-		Type = DeviceEventType::KeyboardEvent;
+		Type = DeviceEventType::AxisEvent;
 		Axis = evt;
 		LogicalTime = timestamp;
 	}
 
 	DeviceEvent( CursorEvent evt, Timestamp timestamp )
 	{
-		Type = DeviceEventType::KeyboardEvent;
+		Type = DeviceEventType::CursorEvent;
 		Cursor = evt;
 		LogicalTime = timestamp;
 	}

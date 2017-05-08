@@ -83,8 +83,13 @@ inline void			MouseDevice::ApplyAllEvents	()
 //
 inline DeviceEvent	MouseDevice::ApplyNextEvent()
 {
-	assert( !"Implement me" );
-	return DeviceEvent();
+	if( m_events.NoMoreEvents() )
+		return DeviceEvent();
+
+	auto& nextEvent = m_events.PopEvent();
+	m_state.ApplyEvent( nextEvent );
+
+	return nextEvent;
 }
 
 // ================================ //

@@ -26,7 +26,7 @@ struct DebugEvent
 	DeviceEvent			EventContent;
 	Size				FrameNumber;
 	uint8				DeviceIdx;
-	DeviceEventType		DeviceType;
+	DeviceType			DeviceType;
 };
 
 
@@ -55,6 +55,10 @@ public:
 	void			QueueUpKeyEvent		( Keyboard::PhysicalKeys key );
 	void			QueueDownKeyEvent	( Keyboard::PhysicalKeys key );
 	void			QueueKeyEvent		( KeyState state, Keyboard::PhysicalKeys key );
+
+	void			QueueMouseClick		( Mouse::PhysicalButtons button );
+	void			QueueMouseUp		( Mouse::PhysicalButtons button );
+	void			QueueMouseEvent		( KeyState state, Mouse::PhysicalButtons key );
 	///@}
 
 public:
@@ -66,7 +70,7 @@ public:
 	const DebugEvent&		QueryEvent			( Size frameNum );
 	bool					IsNext				( Size frameNum );
 
-	void			QueueEvent			( const DeviceEvent& event, Size frameNum, DeviceEventType deviceType, uint8 deviceIdx = 0 );
+	void			QueueEvent			( const DeviceEvent& event, Size frameNum, DeviceType deviceType, uint8 deviceIdx = 0 );
 	void			QueueEvent			( const DebugEvent& event );
 	///@}
 

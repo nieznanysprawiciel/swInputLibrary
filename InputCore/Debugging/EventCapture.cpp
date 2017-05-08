@@ -55,12 +55,44 @@ void			EventCapture::QueueKeyEvent		( KeyState state, Keyboard::PhysicalKeys key
 	keyEvent.Key = key;
 
 	DeviceEvent newEvent( keyEvent, m_nextTimeStamp++ );
-	QueueEvent( newEvent, m_frameNumber, DeviceEventType::KeyboardEvent, 0 );
+	QueueEvent( newEvent, m_frameNumber, DeviceType::Keyboard, 0 );
 }
 
 // ================================ //
 //
-void			EventCapture::QueueEvent		( const DeviceEvent& event, Size frameNum, DeviceEventType deviceType, uint8 deviceIdx )
+void			EventCapture::QueueMouseClick	( Mouse::PhysicalButtons button )
+{
+	KeyState state;
+	state.Press();
+
+	QueueMouseEvent( state, button );
+}
+
+// ================================ //
+//
+void			EventCapture::QueueMouseUp		( Mouse::PhysicalButtons button )
+{
+	KeyState state;
+	state.UnPress();
+
+	QueueMouseEvent( state, button );
+}
+
+// ================================ //
+//
+void			EventCapture::QueueMouseEvent	( KeyState state, Mouse::PhysicalButtons key )
+{
+	ButtonEvent buttonEvent;
+	buttonEvent.State = state;
+	buttonEvent.Button = key;
+
+	DeviceEvent newEvent( buttonEvent, m_nextTimeStamp++ );
+	QueueEvent( newEvent, m_frameNumber, DeviceType::Mouse, 0 );
+}
+
+// ================================ //
+//
+void			EventCapture::QueueEvent		( const DeviceEvent& event, Size frameNum, DeviceType deviceType, uint8 deviceIdx )
 {
 	DebugEvent evt;
 	memcpy( &evt.EventContent, &event, sizeof( event ) );
