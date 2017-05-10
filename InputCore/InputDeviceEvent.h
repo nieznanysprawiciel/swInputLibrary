@@ -207,7 +207,7 @@ struct Mouse
 /**@brief Physical buttons.
 
 Enums form BUTTON0 to BUTTON2 are buttons right, left and modle.
-There'ra aliases for them: LEFT_BUTTON, RIGHT_BUTTON, MIDDLE_BUTTON.
+There'ra aliases for them: LEFT_BUTTON, RIGHT_BUTTON, MIDDLE_BUTTON, XBUTTON1, XBUTTON2.
 
 Next numbers means rest of buttons which can exist on mouse device.
 
@@ -222,6 +222,7 @@ Next numbers means rest of buttons which can exist on mouse device.
 		BUTTON5 = 5,
 		BUTTON6 = 6,
 		BUTTON7 = 7,
+
 		LEFT_BUTTON = BUTTON0,
 		RIGHT_BUTTON = BUTTON1,
 		MIDDLE_BUTTON = BUTTON2,

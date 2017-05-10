@@ -92,6 +92,18 @@ void			EventCapture::QueueMouseEvent	( KeyState state, Mouse::PhysicalButtons ke
 
 // ================================ //
 //
+void			EventCapture::QueueMouseMove	( int16 deltaX, int16 deltaY )
+{
+	CursorEvent cursorMoved;
+	cursorMoved.OffsetX = deltaX;
+	cursorMoved.OffsetY = deltaY;
+
+	DeviceEvent newEvent( cursorMoved, m_nextTimeStamp++ );
+	QueueEvent( newEvent, m_frameNumber, DeviceType::Mouse, 0 );
+}
+
+// ================================ //
+//
 void			EventCapture::QueueEvent		( const DeviceEvent& event, Size frameNum, DeviceType deviceType, uint8 deviceIdx )
 {
 	DebugEvent evt;

@@ -25,6 +25,17 @@ namespace sw {
 namespace input
 {
 
+
+/**@defgroup Input
+@brief Sleeping Wombat input library.
+
+This library provides abstraction layer for native OS input like WinAPI, WPF, DirectInput.
+Library produces input events and state in system independent manner.
+
+@ingroup ModulesStructure*/
+
+
+
 class EventCapture;
 
 

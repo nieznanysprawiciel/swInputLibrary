@@ -59,6 +59,8 @@ public:
 	void			QueueMouseClick		( Mouse::PhysicalButtons button );
 	void			QueueMouseUp		( Mouse::PhysicalButtons button );
 	void			QueueMouseEvent		( KeyState state, Mouse::PhysicalButtons key );
+
+	void			QueueMouseMove		( int16 deltaX, int16 deltaY );
 	///@}
 
 public:

@@ -42,7 +42,7 @@ public:
 	uint16						GetPositionX	() const { return m_position[ 0 ]; }
 	uint16						GetPositionY	() const { return m_position[ 1 ]; }
 
-	void						SetPosition			( short X, short Y );
+	void						SetPosition		( short X, short Y );
 
 	float						WheelDelta		() const { m_axes[ Mouse::PhysicalAxes::WHEEL ]; }
 
@@ -80,6 +80,9 @@ inline MouseState::MouseState()
 		val = 0.0f;
 	for( auto& val : m_buttons )
 		val = 0;
+
+	m_position[ 0 ] = 0;
+	m_position[ 1 ] = 0;
 }
 
 /**@brief */
@@ -176,14 +179,14 @@ inline const KeyState*		MouseState::MiddleButton() const
 //
 inline const KeyState*		MouseState::XButton1() const
 {
-	return &m_buttons[ Mouse::XBUTTON1 ];
+	return &m_buttons[ Mouse::PhysicalButtons::XBUTTON1 ];
 }
 
 // ================================ //
 //
 inline const KeyState*		MouseState::XButton2() const
 {
-	return &m_buttons[ Mouse::XBUTTON2 ];
+	return &m_buttons[ Mouse::PhysicalButtons::XBUTTON2 ];
 }
 
 
