@@ -36,15 +36,15 @@ private:
 	std::vector< MouseDeviceOPtr >		m_mouses;		///< Only first element is in use now.
 	std::vector< JoystickDeviceOPtr >	m_joysticks;	///< Only first element is in use now.
 
-	Timestamp		m_eventNum;							///< Number of event in current frame.
-	Size			m_frameNumber;
+	Timestamp			m_eventNum;							///< Number of event in current frame.
+	Size				m_frameNumber;
 
-	EventCapture*	m_eventCapture;
+	EventCapturePtr		m_eventCapture;
 
 protected:
 public:
 	explicit		DebugInput		() = default;
-	virtual			~DebugInput		() = default;
+	virtual			~DebugInput		();
 
 
 	virtual bool											Init				( const InputInitInfo & initInfo ) override;
@@ -61,6 +61,11 @@ public:
 
 	virtual void			Update					( float timeInterval )	override;
 	virtual bool			UpdateDevices			()						override;
+
+
+public:
+
+	EventCapturePtr			GetEventCapture			()		{ return m_eventCapture; }
 
 };
 

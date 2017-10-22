@@ -37,6 +37,7 @@ Library produces input events and state in system independent manner.
 
 
 class EventCapture;
+DEFINE_PTR_TYPE( EventCapture )
 
 
 /**@brief Initialization structure for input objects.
@@ -46,12 +47,21 @@ struct InputInitInfo
 {
 	AppInstanceHandle		AppInstance;
 	WindowHandle			WndHandle;
-	EventCapture*			EventCapturer;
+	EventCapturePtr			EventCapturer;
+
+// ================================ //
+//
+	InputInitInfo()
+		:	WndHandle( nullptr )
+		,	AppInstance( nullptr )
+	{}
 };
 
 
 
 /**@brief Interface for input classes for capturing user input.
+
+Each native window should have separate IInput.
 
 @todo Deal with situation when we must have two different IInput objects to handle input. For example
 WinAPI deals with keyboard and mouse and other IINput with Joysticks.

@@ -78,6 +78,8 @@ public:
 
 };
 
+DEFINE_PTR_TYPE( EventCapture )
+
 
 }	// input
 }	// sw
